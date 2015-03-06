@@ -24,7 +24,7 @@ describe('class-inheritance-test.js', function() {
             var called = false;
 
             var MyClass = createClass({
-                init : function(a) {
+                constructor : function(a) {
                     called = a;
                 }
             });
