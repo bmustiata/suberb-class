@@ -41,7 +41,7 @@ describe('class-instance-test.js', function() {
                 });
 
                 assert.equal(false, true); // not reachable
-            }).to.throw('meh');
+            }).to.throw('Private member _x is already defined.');
         });
     });
 });
