@@ -33,5 +33,23 @@ describe('class-inheritance-test.js', function() {
 
             assert.equal("called", called);
         });
+
+        it('should export _super for easy prototype access.', function() {
+            var Base = createClass({
+                hello : function() {
+                    return "Hello";
+                }
+            });
+
+            var Extend = createClass(Base, {
+                hello : function() {
+                    return this._super.hello.apply(this, arguments) + " World";
+                }
+            });
+
+            var e = new Extend();
+
+            assert.equal("Hello World", e.hello());
+        });
     });
 });
