@@ -2,7 +2,7 @@
 A superb way of doing JS classes.
 
 ## About
-Superb Class is a simple API that allows creating JS classes with ease
+Superb Class is a simple API that allows creating JS classes with ease,
 designed for ES3/5 usage.
 
 It's heavily tested, simple to use, and validates your
@@ -18,7 +18,7 @@ npm install superb-class
 
 ## Usage
 
-In it's simplest form you can just:
+In its simplest form you can just:
 ```javascript
 var createClass = require('superb-class').createClass;
 
@@ -35,6 +35,8 @@ var Dialog = createClass({
 });
 
 var dialog = new Dialog('Dialog Title');
+
+dialog.show();
 ```
 
 The created class propagates the arguments to the constructor function
@@ -42,7 +44,9 @@ as you might expect. The `this` variable is the variable that will be
 returned and has already the instance updated to have the base class,
 mixins, and current prototypical items already written.
 
+
 A more advanced usage is:
+
 
 ```javascript
 var createClass = require('superb-class').createClass;
@@ -141,7 +145,7 @@ function createClass() { /* ... */ }
 The \_super private member is available on the this instance that points to
 the prototype of the parent class. Thus calls to the base implementation
 of a specific method becomes easier, without holding manual references to
-the base implementation.
+the base implementation, or navigating the prototype chain.
 
 ```javascript
 this._super.show.apply(this, arguments);
@@ -156,9 +160,10 @@ In case this is attempted createClass will throw an error. This is especially
 good in large APIs where it becomes impossible to check if a private member
 with a given name is already defined.
 
-Superb Class will do that for you. Due to the prototypical nature of JavaScript
-private members are available in extending classes. Even if this is possible,
-it's strongly discouraged.
+
+Due to the prototypical nature of JavaScript
+private members are available in extending classes. Even if they are available,
+it's strongly discouraged to access them from derived classes.
 
 ```javascript
 var createClass = require('superb-class').createClass;
@@ -182,11 +187,15 @@ var Extend = createClass(Base, {
 
 Protected members are prefixed with $.
 
+
 Protected members can be overwritten by extending classes, but not by mixins.
-The reason is most likely having abstract classes does make sense to be implemented
-in the extedning class, but the implementation in a mixin is most likely a bug.
+The reason is this: most likely having abstract classes does make sense to be implemented
+in the extending class, but the implementation being present in a mixin is most likely
+a bug.
+
 
 Note that mixins can still add both private _and_ protected members to the instance,
-they just can't override items from the base class, nor can they conflict with the
-ones from the existing prototype instance.
+they just can't override anything from the base class, or clash with
+current prototype items.
+
 
