@@ -5,11 +5,11 @@ var assert = require('assert'),
 describe('class-mixins-test.js', function() {
     describe('Multiple mixins should contribute properties', function() {
         it('should allow multiple mixes, and base classes', function() {
-            var mix1 = createClass({
+            var Mix1 = createClass({
                 mix1: "mix1"
             });
 
-            var mix2 = createClass({
+            var Mix2 = createClass({
                 mix2: "mix2",
                 overrideMix2: "mix2"
             });
@@ -18,7 +18,7 @@ describe('class-mixins-test.js', function() {
                 base: "base"
             });
 
-            var Extend = createClass(Base, {
+            var Extend = createClass(Base, [Mix1, Mix2], {
                 extend: "extend",
                 overrideMix2: "overrideMix2"
             });
@@ -30,6 +30,20 @@ describe('class-mixins-test.js', function() {
             assert.equal("base", e.base);
             assert.equal("extend", e.extend);
             assert.equal("overrideMix2", e.overrideMix2);
+        });
+
+        it('should not allow overwritting protected members in mixins', function() {
+            expect(function() {
+                var Mix1 = createClass({
+                    $protectedMember : 3
+                });
+
+                var Base = createClass({
+                    $protectedMember : 4
+                });
+
+                var Extend = createClass(Base, [Mix1]);
+            }).to.throw('Protected member $protectedMember can not be overwritten by mixins.');
         });
     });
 });
