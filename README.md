@@ -19,11 +19,11 @@ npm install superb-class
 ## Usage
 
 In it's simplest form you can just:
-```
+```javascript
 var createClass = require('superb-class').createClass;
 
 var Dialog = createClass({
-    _title : null, 
+    _title : null,
 
     constructor : function(title) {
         this._title = title;
@@ -47,6 +47,9 @@ A more advanced usage is:
 ```javascript
 var createClass = require('superb-class').createClass;
 
+// ==========================================================================
+// Dialog Class
+// ==========================================================================
 var Dialog = createClass({
     _title : null, // declaring members adds them to checking
 
@@ -59,6 +62,9 @@ var Dialog = createClass({
     }
 });
 
+// ==========================================================================
+// ModalDialog Class
+// ==========================================================================
 var ModalDialog = createClass(Dialog, {
     _modal : false,
 
@@ -79,6 +85,9 @@ var ModalDialog = createClass(Dialog, {
 });
 
 
+// ==========================================================================
+// Usage
+// ==========================================================================
 var dialog = ModalDialog.create('dialog_title');
 // equivalent to: new ModalDialog(true, 'dialog_title');
 
