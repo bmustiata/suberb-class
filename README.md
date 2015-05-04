@@ -198,4 +198,7 @@ Note that mixins can still add both private _and_ protected members to the insta
 they just can't override anything from the base class, or clash with
 current prototype items.
 
+## Change Log
 
+* 2015-05-04 0.2.4 Client support via bower.
+* 2015-03-09 0.2.3 Stable implementation of createClass.

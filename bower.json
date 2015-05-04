@@ -1,0 +1,29 @@
+{
+  "name": "superb-class",
+  "version": "0.2.4",
+  "homepage": "https://github.com/bmustiata/superb-class",
+  "authors": [
+    "Bogdan Mustiata <bogdan.mustiata@gmail.com>"
+  ],
+  "description": "A superb way of creating classes. Focues on OOP stability.",
+  "main": "client/superb-class.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "superb-class",
+    "oop",
+    "class"
+  ],
+  "license": "BSD",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "test",
+    "tests",
+    "lib",
+    "target"
+  ]
+}
