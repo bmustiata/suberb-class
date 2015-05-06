@@ -25,7 +25,7 @@ function createClass() {
     var args,
         result,
         classDefinition,
-        proto;
+        newPrototype;
 
     args = Array.prototype.slice.apply(arguments);
     classDefinition = parseClassDefinition(args);
@@ -36,10 +36,8 @@ function createClass() {
         }
     };
 
-    var newPrototype = {};
-
-    result.prototype = newPrototype;
-    newPrototype.__proto__ = classDefinition.superClass.prototype;
+    result.prototype = objectCreate(classDefinition.superClass.prototype);
+    newPrototype = result.prototype;
     newPrototype._super = classDefinition.superClass.prototype;
 
     for (var i = 0; i < classDefinition.mixins.length; i++) {
@@ -77,4 +75,15 @@ function joinPrototype(sourceObject, targetPrototype, mixin) {
         targetPrototype[k] = sourceObject[k];
     }
 }
+
+/**
+ * Creates an object using Object.create, or defaults to a shim
+ * implementation if it's not supported by the browser.
+ */
+var objectCreate = Object.create ? Object.create : function(proto) {
+    function F(){}
+    F.prototype = proto;
+
+    return new F();
+};
 

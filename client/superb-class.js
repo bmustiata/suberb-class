@@ -11,7 +11,7 @@
  */
 function ClassDefinition() {
     this.name = null; // the class name.
-    this.superClass = Object.prototype;
+    this.superClass = Object;
     this.mixins = [];
     this.instanceProperties = {};
     this.staticProperties = {};
@@ -183,7 +183,7 @@ function createClass() {
     var args,
         result,
         classDefinition,
-        proto;
+        newPrototype;
 
     args = Array.prototype.slice.apply(arguments);
     classDefinition = parseClassDefinition(args);
@@ -194,10 +194,8 @@ function createClass() {
         }
     };
 
-    var newPrototype = {};
-
-    result.prototype = newPrototype;
-    newPrototype.__proto__ = classDefinition.superClass.prototype;
+    result.prototype = objectCreate(classDefinition.superClass.prototype);
+    newPrototype = result.prototype;
     newPrototype._super = classDefinition.superClass.prototype;
 
     for (var i = 0; i < classDefinition.mixins.length; i++) {
@@ -236,6 +234,12 @@ function joinPrototype(sourceObject, targetPrototype, mixin) {
     }
 }
 
+var objectCreate = Object.create ? Object.create : function(proto) {
+    function F(){}
+    F.prototype = proto;
+
+    return new F();
+};
 
 
 window.createClass = createClass;

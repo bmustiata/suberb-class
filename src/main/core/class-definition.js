@@ -8,7 +8,7 @@
  */
 function ClassDefinition() {
     this.name = null; // the class name.
-    this.superClass = Object.prototype;
+    this.superClass = Object;
     this.mixins = [];
     this.instanceProperties = {};
     this.staticProperties = {};
