@@ -34,9 +34,9 @@ module.exports = function(grunt) {
                 files : [
                     {
                         src: [
-                            'src/core/class-definition.js',
-                            'src/core/superb-class.js',
-                            'src/node/exports.js'
+                            'src/main/core/class-definition.js',
+                            'src/main/core/superb-class.js',
+                            'src/main/node/exports.js'
                         ],
                         dest: 'lib/superb-class.js'
                     }
@@ -47,11 +47,11 @@ module.exports = function(grunt) {
                 files: [
                     {
                         src: [
-                            'src/client/wrap-before.js',
-                            'src/core/class-definition.js',
-                            'src/core/superb-class.js',
-                            'src/client/exports.js',
-                            'src/client/wrap-after.js'
+                            'src/main/client/wrap-before.js',
+                            'src/main/core/class-definition.js',
+                            'src/main/core/superb-class.js',
+                            'src/main/client/exports.js',
+                            'src/main/client/wrap-after.js'
                         ],
                         dest: "client/superb-class.js"
                     }
