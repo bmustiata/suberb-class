@@ -56,6 +56,29 @@ module.exports = function(grunt) {
                         dest: "client/superb-class.js"
                     }
                 ]
+            },
+
+            node_mocha_test: {
+                files: [
+                    {
+                        src: [
+                            'src/test/node_mocha/requires.js',
+                            'src/test/js/*test.js'
+                        ],
+                        dest: "test/node_mocha_test.js"
+                    }
+                ]
+            },
+
+            client_mocha_test: {
+                files: [
+                    {
+                        src: [
+                            "src/test/js/*test.js"
+                        ],
+                        dest: "target/client_mocha_tests.js"
+                    }
+                ]
             }
         }
     });
@@ -66,8 +89,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
 
     // register our tasks:
-    grunt.registerTask('build-node', ['clean:dist', 'concat:dist', 'mochaTest']);
-    grunt.registerTask('build-client', ['clean:client', 'concat:client']);
+    grunt.registerTask('build-node', ['clean:dist', 'concat:dist', 'concat:node_mocha_test', 'mochaTest']);
+    grunt.registerTask('build-client', ['clean:client', 'concat:client', 'concat:client_mocha_test']);
 
     grunt.registerTask('default', ['build-node', 'build-client']);
 };

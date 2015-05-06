@@ -106,12 +106,12 @@ function failParsingArgument(args, index) {
 function parseClassDefinition(argumentArray) {
     var classDefinition = new ClassDefinition(),
         stageFunctions = [
-            classDefinition.parseName.bind(classDefinition),
-            classDefinition.parseBaseClass.bind(classDefinition),
-            classDefinition.parseMixins.bind(classDefinition),
-            classDefinition.parseInstanceMembers.bind(classDefinition),
-            classDefinition.parseStaticMembers.bind(classDefinition),
-            failParsingArgument.bind(this, argumentArray)
+            bind(classDefinition.parseName, classDefinition),
+            bind(classDefinition.parseBaseClass, classDefinition),
+            bind(classDefinition.parseMixins, classDefinition),
+            bind(classDefinition.parseInstanceMembers, classDefinition),
+            bind(classDefinition.parseStaticMembers, classDefinition),
+            bind(failParsingArgument, this, argumentArray)
         ],
         currentStage = 0,
         i;
@@ -127,5 +127,28 @@ function parseClassDefinition(argumentArray) {
     }
 
     return classDefinition;
+}
+
+/**
+ * bind - Binds the function with the given arguments.
+ * @param {} fn
+ * @return {Function}
+ */
+function bind(fn, that) {
+    var prevArguments = [];
+
+    for (var i = 2; i < arguments.length; i++) {
+        prevArguments.push(arguments[i]);
+    }
+
+    return function() {
+        var currentArguments = prevArguments.splice(0);
+
+        for (var i = 0; i < arguments.length; i++) {
+            currentArguments.push(arguments[i]);
+        }
+
+        return fn.apply(that, currentArguments);
+    }
 }
 

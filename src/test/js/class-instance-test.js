@@ -1,7 +1,3 @@
-var assert = require('assert'),
-    createClass = require('../lib/superb-class.js').createClass,
-    expect = require("chai").expect;
-
 describe('class-instance-test.js', function() {
     describe('calling create', function() {
         it('should export the properties', function() {
@@ -31,7 +27,7 @@ describe('class-instance-test.js', function() {
         });
 
         it('should not allow overwriting private properties.', function() {
-            expect(function() {
+            assert.throws(function() {
                 var Base = createClass({
                     _x : null
                 });
@@ -39,9 +35,7 @@ describe('class-instance-test.js', function() {
                 var Extend = createClass(Base, {
                     _x : null
                 });
-
-                assert.equal(false, true); // not reachable
-            }).to.throw('Private member _x is already defined.');
+            }, 'Private member _x is already defined');
         });
     });
 });

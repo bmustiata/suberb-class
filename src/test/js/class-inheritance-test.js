@@ -1,7 +1,3 @@
-var assert = require('assert'),
-    createClass = require('../lib/superb-class.js').createClass,
-    expect = require("chai").expect;
-
 describe('class-inheritance-test.js', function() {
     describe('calling create', function() {
         it('should make a function', function() {

@@ -200,5 +200,7 @@ current prototype items.
 
 ## Change Log
 
+* 2015-05-06 0.2.5 Mocha client tests.
 * 2015-05-04 0.2.4 Client support via bower.
 * 2015-03-09 0.2.3 Stable implementation of createClass.
+

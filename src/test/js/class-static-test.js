@@ -1,11 +1,7 @@
-var assert = require('assert'),
-    createClass = require('../lib/superb-class.js').createClass,
-    expect = require("chai").expect;
-
 describe('class-static-test.js', function() {
     describe('creating static blocks', function() {
         it('should have them available', function() {
-            var callResult = false;
+            var callResult = false,
                 MyClass = createClass({}, {
                     staticFunction : function(result) {
                         callResult = result;

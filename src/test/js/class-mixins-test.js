@@ -1,7 +1,3 @@
-var assert = require('assert'),
-    createClass = require('../lib/superb-class.js').createClass,
-    expect = require("chai").expect;
-
 describe('class-mixins-test.js', function() {
     describe('Multiple mixins should contribute properties', function() {
         it('should allow multiple mixes, and base classes', function() {
@@ -33,7 +29,7 @@ describe('class-mixins-test.js', function() {
         });
 
         it('should not allow overwritting protected members in mixins', function() {
-            expect(function() {
+            assert.throws(function() {
                 var Mix1 = createClass({
                     $protectedMember : 3
                 });
@@ -43,7 +39,7 @@ describe('class-mixins-test.js', function() {
                 });
 
                 var Extend = createClass(Base, [Mix1]);
-            }).to.throw('Protected member $protectedMember can not be overwritten by mixins.');
+            }, 'Protected member $protectedMember can not be overwritten by mixins.');
         });
     });
 });
