@@ -37,6 +37,14 @@ describe('class-instance-test.js', function() {
                 });
             }, 'Private member _x is already defined');
         });
+
+        it('should have the name exported correctly', function() {
+            var CustomName = createClass("CustomName", {
+                // nothing
+            });
+
+            assert.ok(/function CustomName/.test(CustomName.toString()));
+        });
     });
 });
 

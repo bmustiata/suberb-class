@@ -30,11 +30,13 @@ function createClass() {
     args = Array.prototype.slice.apply(arguments);
     classDefinition = parseClassDefinition(args);
 
-    result = function A() {
-        if (this.constructor) {
-            this.constructor.apply(this, arguments);
-        }
-    };
+    var className = classDefinition.name ? classDefinition.name : "__anonymous__";
+    result = new Function("return function " + className + "() {\n" +
+            "   if (this.constructor) {\n" +
+            "       this.constructor.apply(this,arguments); \n" +
+            "   }\n" +
+            "}")();
+
 
     result.prototype = objectCreate(classDefinition.superClass.prototype);
     newPrototype = result.prototype;
