@@ -22,7 +22,7 @@ In its simplest form you can just:
 ```javascript
 var createClass = require('superb-class').createClass;
 
-var Dialog = createClass({
+var Dialog = createClass("Dialog", {
     _title : null,
 
     constructor : function(title) {
@@ -140,6 +140,23 @@ function createClass() { /* ... */ }
 
 ## Superb
 
+### Class name
+
+If the class name is given as the first argument, the class name is used in
+the function creation, so the stack trace will look like you would expect.
+
+For example:
+
+```javascript
+var Dialog = createClass("Dialog", {
+    show : function() {
+        // in the stack trace here is Dialog.show()
+    }
+});
+```
+
+If no class name is provided, the `__anonymous__` name will be used.
+
 ### \_super Access
 
 The \_super private member is available on the this instance that points to
@@ -200,6 +217,7 @@ current prototype items.
 
 ## Change Log
 
+* 2015-05-11 0.3.1 Export the class names.
 * 2015-05-06 0.3.0 Mocha client tests. IE8 support.
 * 2015-05-04 0.2.4 Client support via bower.
 * 2015-03-09 0.2.3 Stable implementation of createClass.

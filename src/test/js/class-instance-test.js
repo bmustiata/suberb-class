@@ -45,6 +45,25 @@ describe('class-instance-test.js', function() {
 
             assert.ok(/function CustomName/.test(CustomName.toString()));
         });
+
+        /**
+         * This currently fails on V8, but it seems like a V8 issue.
+         */
+        it('stack trace checks should pass', function() {
+            var CustomName = createClass("CustomName", {
+                checkMethodName : function() {
+                    var stack = new Error("e").stack;
+
+                    assert.ok(!/createClass\.checkMethodName/.test(stack),
+                        "Wrong name for the class name inside calls:\n" +
+                        stack +
+                        "\n\nIf running inside a V8 JS engine, please ignore this test.");
+                }
+            });
+
+            var customName = new CustomName();
+            customName.checkMethodName();
+        });
     });
 });
 

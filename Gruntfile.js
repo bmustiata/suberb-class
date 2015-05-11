@@ -90,8 +90,10 @@ module.exports = function(grunt) {
 
     // register our tasks:
     grunt.registerTask('build-node', ['clean:dist', 'concat:dist', 'concat:node_mocha_test', 'mochaTest']);
-    grunt.registerTask('build-client', ['clean:client', 'concat:client', 'concat:client_mocha_test']);
 
-    grunt.registerTask('default', ['build-node', 'build-client']);
+    grunt.registerTask('clean-client', ['clean:client']);
+    grunt.registerTask('build-client', ['concat:client', 'concat:client_mocha_test']);
+
+    grunt.registerTask('default', ['clean-client', 'build-client', 'build-node']);
 };
 

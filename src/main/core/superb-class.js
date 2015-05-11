@@ -19,7 +19,7 @@
  *          from the function itself.
  * @param {Object} staticProperties Static properties that will be defined
  *          on the returned class itself.
- * @type {function}
+ * @type {Function}
  */
 function createClass() {
     var args,
