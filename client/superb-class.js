@@ -199,6 +199,7 @@ function createClass() {
     result.prototype = objectCreate(classDefinition.superClass.prototype);
     newPrototype = result.prototype;
     newPrototype._super = classDefinition.superClass.prototype;
+    newPrototype.__name = classDefinition.name;
 
     for (var i = 0; i < classDefinition.mixins.length; i++) {
         joinPrototype(classDefinition.mixins[i].prototype, newPrototype, /* mixin: */ true);
@@ -220,8 +221,8 @@ function createClass() {
  */
 function joinPrototype(sourceObject, targetPrototype, mixin) {
     for (var k in sourceObject) {
-        if (mixin && k == '_super') {
-            continue; // ignore _super from mixins.
+        if (mixin && (k == '_super' || k == '__name')) {
+            continue; // ignore _super, __name from mixins.
         }
 
         if (/^_/.test(k) && (typeof targetPrototype[k] !== "undefined")) {

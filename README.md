@@ -157,6 +157,8 @@ var Dialog = createClass("Dialog", {
 
 If no class name is provided, the `__anonymous__` name will be used.
 
+The class name is available on the instances as the `__name` attribute.
+
 ### \_super Access
 
 The \_super private member is available on the this instance that points to
@@ -217,6 +219,7 @@ current prototype items.
 
 ## Change Log
 
+* 2016-11-04 0.3.2 Make the class names available on `this.__name`.
 * 2015-05-11 0.3.1 Export the class names.
 * 2015-05-06 0.3.0 Mocha client tests. IE8 support.
 * 2015-05-04 0.2.4 Client support via bower.

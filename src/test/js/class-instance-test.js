@@ -64,6 +64,44 @@ describe('class-instance-test.js', function() {
             var customName = new CustomName();
             customName.checkMethodName();
         });
+
+        it('should have the class name on the `__name` property.', function() {
+            var CustomClass = createClass("CustomClass", {
+                getClassName: function() {
+                	return this.__name;
+                }
+            });
+
+            var customClass = new CustomClass();
+            assert.equal(customClass.getClassName(), "CustomClass");
+        });
+
+        it('should have the class `__name`, including when using inheritance', function() {
+            var BaseClass = createClass("BaseClass", {
+                /**
+                 * @return {string}
+                 */
+                getClassName: function() {
+                	return this.__name;
+                }
+            });
+
+            var DerivedClass = createClass("DerivedClass", BaseClass, {
+                /**
+                 * @return {string}
+                 */
+                getDerivedName: function() {
+                	return this.__name;
+                }
+            });
+
+            var baseClass = new BaseClass();
+            assert.equal(baseClass.getClassName(), "BaseClass");
+
+            var derivedClass = new DerivedClass();
+            assert.equal(derivedClass.getClassName(), "DerivedClass");
+            assert.equal(derivedClass.getDerivedName(), "DerivedClass");
+        });
     });
 });
 
